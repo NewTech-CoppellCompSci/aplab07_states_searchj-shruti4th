@@ -38,8 +38,8 @@ public class UnitedStates
 			 * the line below it.  This way you can write
 			 * and test binarySearchRecursive
 			 */
-			State state = binarySearch(stateName);
-			//State state = binarySearchRecursive(stateName, 0, states.size()-1);
+			//State state = binarySearch(stateName);
+			State state = binarySearchRecursive(stateName, 0, states.size()-1);
 			
 			if(state == null)
 			   System.out.println("State not found");
@@ -66,7 +66,26 @@ public class UnitedStates
     // corresponds to key; otherwise it returns null
 	public State binarySearch(String key)
 	{
-
+		int min = 0;
+		int max = states.size();
+		int midpoint = 0;
+		
+		System.out.println(max);	
+		while (min < max) {
+			midpoint = (min + max)/2;
+			
+			if (states.get(midpoint).compareTo(key) < 0) {
+				
+				min = midpoint + 1;
+			
+			}
+			else if (states.get(midpoint).compareTo(key) > 0) {
+				max = midpoint - 1;
+			}
+			else if (states.get(midpoint).compareTo(key) == 0) {
+				return states.get(midpoint);
+			}
+		}
 
 		return null;
 
@@ -80,10 +99,36 @@ public class UnitedStates
     // corresponds to key; otherwise it returns null
 	public State binarySearchRecursive(String key, int min, int max)
 	{
+		
+		//int less = min;
+		//int more = max;
+		int midpoint = (min+max)/2;
+		
+		//System.out.println("midpoint = " + midpoint + " min = " + min + " max = " + max);
+		
+		if (min > max) {
+			return null;
+		} 
+		else {
+		
 
-
-		return null;
-
+			if (states.get(midpoint).compareTo(key) < 0) {
+				min = midpoint + 1;
+				
+				return binarySearchRecursive(key, min, max);
+				
+			}
+			else if (states.get(midpoint).compareTo(key) > 0) {
+				max = midpoint - 1;
+				return binarySearchRecursive(key, min, max);
+			}
+			else { 
+				//System.out.println("Returning midpoint");
+				return states.get(midpoint);
+				
+			}
+		}
+	
 	}
 	
 	
