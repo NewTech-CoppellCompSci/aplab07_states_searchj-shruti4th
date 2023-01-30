@@ -22,10 +22,12 @@ public class State implements Comparable
     // either a positive number, negative number, or zero.
 	public int compareTo(Object obj)
 	{
-
+		String str = (String) obj;
+		
+		int comparison = this.name.compareTo(str);
 		
 		
-		return 0;
+		return comparison;
 	}
 	
 	public String getName()
